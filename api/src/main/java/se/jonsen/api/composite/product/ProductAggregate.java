@@ -8,9 +8,9 @@ public class ProductAggregate {
     private final int weight;
     private final List<RecommendationSummary> recommendations;
     private final List<ReviewSummary> reviews;
-    private final String serviceAddress;
+    private final ServiceAddresses serviceAddress;
 
-    public ProductAggregate(int productId, String name, int weight, List<RecommendationSummary> recommendations, List<ReviewSummary> reviews, String serviceAddress) {
+    public ProductAggregate(int productId, String name, int weight, List<RecommendationSummary> recommendations, List<ReviewSummary> reviews, ServiceAddresses serviceAddress) {
         this.productId = productId;
         this.name = name;
         this.weight = weight;
@@ -39,7 +39,7 @@ public class ProductAggregate {
         return reviews;
     }
 
-    public String getServiceAddress() {
+    public ServiceAddresses getServiceAddress() {
         return serviceAddress;
     }
 }

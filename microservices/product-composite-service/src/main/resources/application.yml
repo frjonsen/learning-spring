@@ -1,0 +1,20 @@
+server:
+  port: 7000
+  error:
+      include-message: always
+
+app:
+  product-service:
+    host: product-service
+    port: 7001
+  recommendation-service:
+    host: recommendation-service
+    port: 7002
+  review-service:
+    host: review-service
+    port: 7003
+
+logging:
+    level:
+      root: INFO
+      se.jonsen: DEBUG
