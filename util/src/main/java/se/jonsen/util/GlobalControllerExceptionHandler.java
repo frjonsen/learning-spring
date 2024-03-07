@@ -6,11 +6,14 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.http.server.reactive.ServerHttpRequest;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.RestControllerAdvice;
+import se.jonsen.api.exceptions.InvalidInputException;
 import se.jonsen.api.exceptions.NotFoundException;
 
 import static org.springframework.http.HttpStatus.NOT_FOUND;
 import static org.springframework.http.HttpStatus.UNPROCESSABLE_ENTITY;
 
+@RestControllerAdvice
 public class GlobalControllerExceptionHandler {
     private static final Logger LOG = org.slf4j.LoggerFactory.getLogger(GlobalControllerExceptionHandler.class);
 
@@ -21,8 +24,8 @@ public class GlobalControllerExceptionHandler {
     }
 
     @ResponseStatus(UNPROCESSABLE_ENTITY)
-    @ExceptionHandler(IllegalArgumentException.class)
-    public @ResponseBody HttpErrorInfo handleIllegalArgumentExceptions(ServerHttpRequest request, IllegalArgumentException ex) {
+    @ExceptionHandler(InvalidInputException.class)
+    public @ResponseBody HttpErrorInfo handleInvalidInputExceptions(ServerHttpRequest request, InvalidInputException ex) {
         return createhttpErrorInfo(UNPROCESSABLE_ENTITY, request, ex);
     }
 

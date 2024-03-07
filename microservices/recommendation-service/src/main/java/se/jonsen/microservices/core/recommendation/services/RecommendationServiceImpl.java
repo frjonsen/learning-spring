@@ -4,13 +4,14 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.RestController;
 import se.jonsen.api.core.recommendation.Recommendation;
+import se.jonsen.api.core.recommendation.RecommendationService;
 import se.jonsen.api.exceptions.InvalidInputException;
 import se.jonsen.util.ServiceUtil;
 
 import java.util.List;
 
 @RestController
-public class RecommendationServiceImpl {
+public class RecommendationServiceImpl implements RecommendationService {
     private static final Logger LOG = LoggerFactory.getLogger(RecommendationServiceImpl.class);
 
     private final ServiceUtil serviceUtil;
@@ -19,6 +20,7 @@ public class RecommendationServiceImpl {
         this.serviceUtil = serviceUtil;
     }
 
+    @Override
     public List<Recommendation> getRecommendations(int productId) {
         if (productId < 1) throw new InvalidInputException("Invalid productId: " + productId);
 

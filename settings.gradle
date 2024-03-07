@@ -1,7 +1,15 @@
 include ':microservices:product-service'
+project(':microservices:product-service').projectDir = new File('microservices/product-service')
+
 include ':microservices:review-service'
+project(':microservices:review-service').projectDir = new File('microservices/review-service')
+
 include ':microservices:recommendation-service'
+project(':microservices:recommendation-service').projectDir = new File('microservices/recommendation-service')
+
 include ':microservices:product-composite-service'
+project(':microservices:product-composite-service').projectDir = new File('microservices/product-composite-service')
+
 include 'api'
 include 'util'
 
