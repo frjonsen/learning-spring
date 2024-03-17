@@ -55,6 +55,7 @@ public class ProductCompositeIntegration implements ProductService, Recommendati
         try {
             return mapper.readValue(ex.getResponseBodyAsString(), HttpErrorInfo.class).getMessage();
         } catch (IOException ioex) {
+            LOG.error("Failed to convert error to http body", ioex);
             return ex.getMessage();
         }
     }
@@ -71,7 +72,7 @@ public class ProductCompositeIntegration implements ProductService, Recommendati
             switch (HttpStatus.resolve(ex.getStatusCode().value())) {
                 case NOT_FOUND -> throw new NotFoundException(getErrorMessage(ex));
                 case UNPROCESSABLE_ENTITY -> throw new InvalidInputException(getErrorMessage(ex));
-                default -> throw new RuntimeException(getErrorMessage(ex));
+                default -> throw ex;
             }
         }
     }
@@ -101,10 +102,8 @@ public class ProductCompositeIntegration implements ProductService, Recommendati
         LOG.debug("Will call getReviews API on URL: {}", url);
         try {
             var reviews = restTemplate
-                    .exchange(url, HttpMethod.GET, null, new ParameterizedTypeReference<List<Review>>() {
-                    })
+                    .exchange(url, HttpMethod.GET, null, new ParameterizedTypeReference<List<Review>>() {})
                     .getBody();
-
             LOG.debug("Found {} reviews for a product with id: {}", reviews.size(), productId);
             return reviews;
         } catch (Exception ex) {

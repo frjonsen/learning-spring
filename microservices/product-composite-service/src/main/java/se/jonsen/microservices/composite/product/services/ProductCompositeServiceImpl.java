@@ -8,7 +8,6 @@ import se.jonsen.api.exceptions.NotFoundException;
 import se.jonsen.util.ServiceUtil;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @RestController
 public class ProductCompositeServiceImpl implements ProductCompositeService {
