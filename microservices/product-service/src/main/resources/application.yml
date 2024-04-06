@@ -8,3 +8,11 @@ logging:
     level:
         root: INFO
         se.jonsen.microservices: DEBUG
+
+---
+spring:
+    config:
+        activate:
+            on-profile: docker
+server:
+    port: 8080
